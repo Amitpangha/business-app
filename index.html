@@ -1,162 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Make it mobile friendly -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Make it a PWA (Progressive Web App) -->
-<link rel="manifest" href="manifest.json">
-<!-- Icons for mobile -->
-<link rel="icon" href="icon.png">
-     <title>BusinessOS - Free Business Management</title>
-    <!-- Add Bootstrap CSS -->
+    <title>Business App - Bill Saving Fixed</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Add Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-        }
-        button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background: #2980b9;
-        }
-
-        .sidebar {
-            background: #2c3e50;
-            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
-        .main-content {
-            padding: 30px;
+        .app-container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        .stat-card {
+        .card-custom {
             background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .btn-success {
+            background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%);
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #1a73e8 0%, #6c8ef5 100%);
+            border: none;
+        }
+        .total-display {
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .bill-item {
+            background: #f1f8ff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border-left: 4px solid #1a73e8;
         }
     </style>
 </head>
 <body>
-   
-    <div class="container-fluid">
+    <div class="app-container">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="text-white">🏪 Business Management App</h1>
+            <p class="text-white-50">Create and save bills easily | Works offline</p>
+        </div>
+
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar">
-                <h3 class="text-center mb-4">
-                    <i class="bi bi-shop"></i> BusinessOS
-                </h3>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi bi-speedometer2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi bi-receipt"></i> Create Bill
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi bi-people"></i> Customers
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi bi-bar-chart"></i> Reports
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">
-                            <i class="bi bi-box"></i> Inventory
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 main-content">
-                <h2>Welcome to BusinessOS</h2>
-                <p class="text-muted">Simple business management for shopkeepers</p>
-                
-                <!-- Stats Cards -->
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <h5><i class="bi bi-currency-rupee text-success"></i> Today's Sales</h5>
-                            <h3>₹0</h3>
-                        </div>
+            <!-- Left Column - Create Bill -->
+            <div class="col-md-6">
+                <div class="card-custom">
+                    <h3 class="mb-4">📝 Create New Bill</h3>
+                    
+                    <!-- Customer Info -->
+                    <div class="mb-3">
+                        <label class="form-label">Customer Name *</label>
+                        <input type="text" class="form-control" id="customerName" placeholder="Enter customer name" required>
                     </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <h5><i class="bi bi-people text-primary"></i> Total Customers</h5>
-                            <h3>0</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <h5><i class="bi bi-receipt text-warning"></i> Today's Bills</h5>
-                            <h3>0</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card">
-                            <h5><i class="bi bi-cash-coin text-danger"></i> Pending Payments</h5>
-                            <h3>₹0</h3>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Create Bill Form -->
-                <div class="row mt-5">
-                    <div class="col-md-6">
-                        <div class="stat-card">
-                            <h4><i class="bi bi-plus-circle"></i> Create New Bill</h4>
-                            <div class="mb-3">
-                                <label>Customer Name</label>
-                                <input type="text" class="form-control" id="customerName" placeholder="Enter customer name">
+                    
+                    <!-- Add Item Form -->
+                    <div class="mb-3 p-3 border rounded">
+                        <h5>Add Items</h5>
+                        <div class="row g-2 mb-2">
+                            <div class="col-5">
+                                <input type="text" class="form-control" id="itemName" placeholder="Item name">
                             </div>
-                            <div class="mb-3">
-                                <label>Amount (₹)</label>
-                                <input type="number" class="form-control" id="amount" placeholder="Enter amount">
+                            <div class="col-3">
+                                <input type="number" class="form-control" id="itemQty" placeholder="Qty" value="1">
                             </div>
-                            <button class="btn btn-primary" onclick="createBill()">
-                                <i class="bi bi-save"></i> Save Bill
-                            </button>
+                            <div class="col-3">
+                                <input type="number" class="form-control" id="itemRate" placeholder="Rate (₹)">
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-sm btn-success" onclick="addItem()">+</button>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Recent Bills -->
-                    <div class="col-md-6">
-                        <div class="stat-card">
-                            <h4><i class="bi bi-clock-history"></i> Recent Bills</h4>
-                            <div id="billList">
-                                <p class="text-muted">No bills created yet</p>
+                    <!-- Items List -->
+                    <div id="itemsContainer" class="mb-3">
+                        <p class="text-muted">No items added yet</p>
+                    </div>
+                    
+                    <!-- Total -->
+                    <div class="total-display mb-3">
+                        Total Amount: ₹<span id="totalAmount">0</span>
+                    </div>
+                    
+                    <!-- Save Button -->
+                    <button class="btn btn-primary w-100 py-2" onclick="saveBill()">
+                        💾 SAVE BILL TO DATABASE
+                    </button>
+                    
+                    <!-- Status Message -->
+                    <div id="statusMessage" class="mt-2 text-center"></div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Saved Bills -->
+            <div class="col-md-6">
+                <div class="card-custom">
+                    <h3 class="mb-4">📋 Saved Bills</h3>
+                    
+                    <!-- Bills Counter -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Total Bills: <strong id="billCount">0</strong></span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="clearAllBills()">
+                            Clear All
+                        </button>
+                    </div>
+                    
+                    <!-- Bills List -->
+                    <div id="billsList" style="max-height: 500px; overflow-y: auto;">
+                        <p class="text-muted">No bills saved yet</p>
+                    </div>
+                </div>
+                
+                <!-- Stats Card -->
+                <div class="card-custom">
+                    <h5>📊 Today's Statistics</h5>
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="p-2">
+                                <h2 id="todayBills">0</h2>
+                                <small>Today's Bills</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2">
+                                <h2 id="todaySales">₹0</h2>
+                                <small>Today's Sales</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2">
+                                <h2 id="totalSales">₹0</h2>
+                                <small>Total Sales</small>
                             </div>
                         </div>
                     </div>
@@ -164,84 +150,476 @@
             </div>
         </div>
     </div>
-    
-    <script src="app.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
+    <!-- JavaScript -->
     <script>
-        // Same JavaScript as before
-        let bills = [];
+        // ====================
+        // GLOBAL VARIABLES
+        // ====================
+        let currentItems = [];  // Items in current bill
+        let allBills = [];      // All saved bills
         
-        async function createBill() {
-            const customer = document.getElementById('customerName').value;
-            const amount = document.getElementById('amount').value;
+        // ====================
+        // PAGE LOAD
+        // ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Page loaded, loading saved bills...");
+            loadSavedBills();
+            updateStats();
+        });
+        
+        // ====================
+        // 1. ADD ITEM FUNCTION
+        // ====================
+        function addItem() {
+            const name = document.getElementById('itemName').value.trim();
+            const qty = parseInt(document.getElementById('itemQty').value);
+            const rate = parseFloat(document.getElementById('itemRate').value);
             
-            if(customer && amount) {
-                const bill = {
-                    id: Date.now(),
-                    customer: customer,
-                    amount: amount,
-                    date: new Date().toLocaleDateString()
+            // Validation
+            if (!name) {
+                showMessage("Please enter item name", "danger");
+                return;
+            }
+            if (isNaN(qty) || qty <= 0) {
+                showMessage("Please enter valid quantity", "danger");
+                return;
+            }
+            if (isNaN(rate) || rate <= 0) {
+                showMessage("Please enter valid rate", "danger");
+                return;
+            }
+            
+            // Create item object
+            const item = {
+                id: Date.now() + Math.random(),
+                name: name,
+                quantity: qty,
+                rate: rate,
+                total: qty * rate
+            };
+            
+            // Add to current items
+            currentItems.push(item);
+            
+            // Update display
+            updateItemsDisplay();
+            updateTotal();
+            
+            // Clear input fields
+            document.getElementById('itemName').value = '';
+            document.getElementById('itemQty').value = '1';
+            document.getElementById('itemRate').value = '';
+            
+            // Focus back to item name
+            document.getElementById('itemName').focus();
+            
+            showMessage(`"${name}" added successfully`, "success");
+        }
+        
+        // ====================
+        // 2. UPDATE ITEMS DISPLAY
+        // ====================
+        function updateItemsDisplay() {
+            const container = document.getElementById('itemsContainer');
+            
+            if (currentItems.length === 0) {
+                container.innerHTML = '<p class="text-muted">No items added yet</p>';
+                return;
+            }
+            
+            let html = '<div class="list-group">';
+            currentItems.forEach((item, index) => {
+                html += `
+                <div class="list-group-item bill-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <br>
+                            <small>${item.quantity} × ₹${item.rate} = ₹${item.total}</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">
+                            ✕
+                        </button>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        // ====================
+        // 3. REMOVE ITEM
+        // ====================
+        function removeItem(index) {
+            if (confirm("Remove this item?")) {
+                currentItems.splice(index, 1);
+                updateItemsDisplay();
+                updateTotal();
+                showMessage("Item removed", "warning");
+            }
+        }
+        
+        // ====================
+        // 4. UPDATE TOTAL
+        // ====================
+        function updateTotal() {
+            const total = currentItems.reduce((sum, item) => sum + item.total, 0);
+            document.getElementById('totalAmount').textContent = total.toFixed(2);
+        }
+        
+        // ====================
+        // 5. SAVE BILL (MAIN FUNCTION)
+        // ====================
+        function saveBill() {
+            // Get customer name
+            const customerName = document.getElementById('customerName').value.trim();
+            
+            // Validation
+            if (!customerName) {
+                showMessage("Please enter customer name", "danger");
+                document.getElementById('customerName').focus();
+                return;
+            }
+            
+            if (currentItems.length === 0) {
+                showMessage("Please add at least one item", "danger");
+                return;
+            }
+            
+            // Create bill object
+            const bill = {
+                id: 'BILL-' + Date.now(),
+                customerName: customerName,
+                items: [...currentItems], // Copy items
+                totalAmount: currentItems.reduce((sum, item) => sum + item.total, 0),
+                date: new Date().toLocaleString(),
+                timestamp: Date.now()
+            };
+            
+            // Add to bills array
+            allBills.push(bill);
+            
+            // Save to localStorage
+            saveToLocalStorage();
+            
+            // Update display
+            updateBillsDisplay();
+            updateStats();
+            
+            // Reset form
+            resetForm();
+            
+            // Show success message
+            showMessage(`Bill saved successfully! Total: ₹${bill.totalAmount.toFixed(2)}`, "success");
+            
+            // Play success sound (optional)
+            playSuccessSound();
+        }
+        
+        // ====================
+        // 6. SAVE TO LOCALSTORAGE
+        // ====================
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('businessBills', JSON.stringify(allBills));
+                console.log("Bills saved to localStorage. Total:", allBills.length);
+                return true;
+            } catch (error) {
+                console.error("Error saving to localStorage:", error);
+                showMessage("Error saving bill. Local storage might be full.", "danger");
+                return false;
+            }
+        }
+        
+        // ====================
+        // 7. LOAD SAVED BILLS
+        // ====================
+        function loadSavedBills() {
+            try {
+                const saved = localStorage.getItem('businessBills');
+                if (saved) {
+                    allBills = JSON.parse(saved);
+                    console.log("Loaded bills from localStorage:", allBills.length);
+                    updateBillsDisplay();
+                } else {
+                    console.log("No saved bills found");
+                    allBills = [];
+                }
+            } catch (error) {
+                console.error("Error loading bills:", error);
+                allBills = [];
+            }
+        }
+        
+        // ====================
+        // 8. UPDATE BILLS DISPLAY
+        // ====================
+        function updateBillsDisplay() {
+            const container = document.getElementById('billsList');
+            const countElement = document.getElementById('billCount');
+            
+            countElement.textContent = allBills.length;
+            
+            if (allBills.length === 0) {
+                container.innerHTML = '<p class="text-muted">No bills saved yet</p>';
+                return;
+            }
+            
+            // Sort by date (newest first)
+            const sortedBills = [...allBills].sort((a, b) => b.timestamp - a.timestamp);
+            
+            let html = '<div class="list-group">';
+            sortedBills.forEach((bill, index) => {
+                html += `
+                <div class="list-group-item mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <strong>${bill.customerName}</strong>
+                            <br>
+                            <small class="text-muted">${bill.date}</small>
+                        </div>
+                        <div class="text-end">
+                            <h5>₹${bill.totalAmount.toFixed(2)}</h5>
+                            <small>${bill.items.length} items</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-info mt-2" onclick="viewBillDetails(${index})">
+                        View Details
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger mt-2" onclick="deleteBill(${index})">
+                        Delete
+                    </button>
+                </div>`;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        // ====================
+        // 9. VIEW BILL DETAILS
+        // ====================
+        function viewBillDetails(index) {
+            const bill = allBills[index];
+            let itemsList = '';
+            bill.items.forEach(item => {
+                itemsList += `${item.quantity} × ${item.name} @ ₹${item.rate} = ₹${item.total}\n`;
+            });
+            
+            alert(`BILL DETAILS
+Customer: ${bill.customerName}
+Date: ${bill.date}
+Total: ₹${bill.totalAmount.toFixed(2)}
+Items:
+${itemsList}`);
+        }
+        
+        // ====================
+        // 10. DELETE BILL
+        // ====================
+        function deleteBill(index) {
+            if (confirm("Are you sure you want to delete this bill?")) {
+                allBills.splice(index, 1);
+                saveToLocalStorage();
+                updateBillsDisplay();
+                updateStats();
+                showMessage("Bill deleted", "warning");
+            }
+        }
+        
+        // ====================
+        // 11. CLEAR ALL BILLS
+        // ====================
+        function clearAllBills() {
+            if (allBills.length === 0) {
+                showMessage("No bills to clear", "info");
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to delete ALL ${allBills.length} bills? This cannot be undone.`)) {
+                allBills = [];
+                localStorage.removeItem('businessBills');
+                updateBillsDisplay();
+                updateStats();
+                showMessage("All bills cleared", "warning");
+            }
+        }
+        
+        // ====================
+        // 12. UPDATE STATISTICS
+        // ====================
+        function updateStats() {
+            const today = new Date().toLocaleDateString();
+            
+            // Today's bills
+            const todayBills = allBills.filter(bill => 
+                new Date(bill.timestamp).toLocaleDateString() === today
+            );
+            
+            // Today's sales
+            const todaySales = todayBills.reduce((sum, bill) => sum + bill.totalAmount, 0);
+            
+            // Total sales
+            const totalSales = allBills.reduce((sum, bill) => sum + bill.totalAmount, 0);
+            
+            // Update display
+            document.getElementById('todayBills').textContent = todayBills.length;
+            document.getElementById('todaySales').textContent = '₹' + todaySales.toFixed(2);
+            document.getElementById('totalSales').textContent = '₹' + totalSales.toFixed(2);
+        }
+        
+        // ====================
+        // 13. RESET FORM
+        // ====================
+        function resetForm() {
+            document.getElementById('customerName').value = '';
+            currentItems = [];
+            updateItemsDisplay();
+            updateTotal();
+            document.getElementById('customerName').focus();
+        }
+        
+        // ====================
+        // 14. SHOW MESSAGE
+        // ====================
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('statusMessage');
+            messageDiv.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${text}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>`;
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (messageDiv.firstChild) {
+                    messageDiv.removeChild(messageDiv.firstChild);
+                }
+            }, 3000);
+        }
+        
+        // ====================
+        // 15. PLAY SUCCESS SOUND (Optional)
+        // ====================
+        function playSuccessSound() {
+            // Simple beep sound
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 800;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                // Sound not supported, continue silently
+            }
+        }
+        
+        // ====================
+        // 16. KEYBOARD SHORTCUTS
+        // ====================
+        document.addEventListener('keydown', function(event) {
+            // Ctrl + Enter to save bill
+            if (event.ctrlKey && event.key === 'Enter') {
+                event.preventDefault();
+                saveBill();
+            }
+            
+            // Enter in item name field to add item
+            if (event.target.id === 'itemName' && event.key === 'Enter') {
+                event.preventDefault();
+                addItem();
+            }
+            
+            // Enter in rate field to add item
+            if (event.target.id === 'itemRate' && event.key === 'Enter') {
+                event.preventDefault();
+                addItem();
+            }
+        });
+        
+        // ====================
+        // 17. EXPORT BILLS (Bonus Feature)
+        // ====================
+        function exportBills() {
+            if (allBills.length === 0) {
+                showMessage("No bills to export", "info");
+                return;
+            }
+            
+            const dataStr = JSON.stringify(allBills, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `business-bills-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showMessage("Bills exported successfully", "success");
+        }
+        
+        // ====================
+        // 18. IMPORT BILLS (Bonus Feature)
+        // ====================
+        function importBills() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const importedBills = JSON.parse(e.target.result);
+                        if (Array.isArray(importedBills)) {
+                            allBills = importedBills;
+                            saveToLocalStorage();
+                            updateBillsDisplay();
+                            updateStats();
+                            showMessage(`Successfully imported ${importedBills.length} bills`, "success");
+                        } else {
+                            showMessage("Invalid file format", "danger");
+                        }
+                    } catch (error) {
+                        showMessage("Error reading file: " + error.message, "danger");
+                    }
                 };
                 
-                bills.push(bill);
-                displayBills();
-                
-                // Clear inputs
-                document.getElementById('customerName').value = '';
-                document.getElementById('amount').value = '';
-                
-                alert('Bill created successfully!');
-            } else {
-                alert('Please fill all fields');
-            }
+                reader.readAsText(file);
+            };
+            
+            input.click();
         }
         
-        function displayBills() {
-            const billList = document.getElementById('billList');
-            let html = '';
-            
-            if(bills.length === 0) {
-                html = '<p class="text-muted">No bills created yet</p>';
-            } else {
-                html = '<table class="table table-sm"><tbody>';
-                bills.forEach(bill => {
-                    html += `<tr>
-                        <td>${bill.customer}</td>
-                        <td>₹${bill.amount}</td>
-                        <td>${bill.date}</td>
-                    </tr>`;
-                });
-                html += '</tbody></table>';
-            }
-            
-            billList.innerHTML = html;
-        }
+        // ====================
+        // INITIALIZE ON LOAD
+        // ====================
+        console.log("Business App initialized successfully!");
+        console.log("Available functions:");
+        console.log("- addItem(): Add item to current bill");
+        console.log("- saveBill(): Save current bill");
+        console.log("- clearAllBills(): Delete all bills");
+        console.log("- exportBills(): Download bills as JSON");
+        console.log("- importBills(): Import bills from JSON file");
+        
     </script>
-</body>
-
-<script src="app.js"></script>
-<script>
-    async function createBill() {
-        const customer = document.getElementById('customerName').value;
-        const amount = document.getElementById('amount').value;
-        
-        if(customer && amount) {
-            // Save to database
-            const saved = await saveBillToDatabase(customer, amount);
-            
-            if(saved) {
-                alert('Bill saved to cloud!');
-                // Refresh bills from database
-                loadBillsFromDatabase();
-            }
-        }
-    }
     
-    async function loadBillsFromDatabase() {
-        // We'll add this later
-        console.log('Loading bills from database...');
-    }
-</script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
