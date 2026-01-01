@@ -1,625 +1,748 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Business App - Bill Saving Fixed</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusinessOS - Free Business Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
         body {
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            color: var(--dark);
         }
-        .app-container {
-            max-width: 1000px;
-            margin: 0 auto;
+        
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
         }
-        .card-custom {
+        
+        .feature-card {
             background: white;
             border-radius: 15px;
+            padding: 30px;
+            margin: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 25px;
-            margin-bottom: 25px;
+            transition: transform 0.3s;
+            height: 100%;
         }
-        .btn-success {
-            background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%);
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
             border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
         }
-        .btn-primary {
-            background: linear-gradient(90deg, #1a73e8 0%, #6c8ef5 100%);
-            border: none;
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .total-display {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
+        
+        .nav-brand {
             font-size: 24px;
             font-weight: bold;
-            color: #28a745;
+            color: white !important;
         }
-        .bill-item {
-            background: #f1f8ff;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 8px;
-            border-left: 4px solid #1a73e8;
+        
+        .nav-brand i {
+            color: var(--success);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .price small {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <div class="text-center mb-4">
-            <h1 class="text-white">🏪 Business Management App</h1>
-            <p class="text-white-50">Create and save bills easily | Works offline</p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand nav-brand" href="#">
+                <i class="fas fa-store"></i> BusinessOS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-gradient" onclick="showLogin()">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <div class="row">
-            <!-- Left Column - Create Bill -->
-            <div class="col-md-6">
-                <div class="card-custom">
-                    <h3 class="mb-4">📝 Create New Bill</h3>
-                    
-                    <!-- Customer Info -->
-                    <div class="mb-3">
-                        <label class="form-label">Customer Name *</label>
-                        <input type="text" class="form-control" id="customerName" placeholder="Enter customer name" required>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-3 fw-bold mb-4">Manage Your Business Like a Pro</h1>
+                    <p class="lead mb-4">Free business management software for shopkeepers, retailers, and small businesses. Everything you need in one place.</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button class="btn btn-gradient btn-lg" onclick="showSignup()">
+                            <i class="fas fa-rocket"></i> Start Free Trial
+                        </button>
+                        <a href="#features" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-play-circle"></i> Watch Demo
+                        </a>
                     </div>
-                    
-                    <!-- Add Item Form -->
-                    <div class="mb-3 p-3 border rounded">
-                        <h5>Add Items</h5>
-                        <div class="row g-2 mb-2">
-                            <div class="col-5">
-                                <input type="text" class="form-control" id="itemName" placeholder="Item name">
-                            </div>
-                            <div class="col-3">
-                                <input type="number" class="form-control" id="itemQty" placeholder="Qty" value="1">
-                            </div>
-                            <div class="col-3">
-                                <input type="number" class="form-control" id="itemRate" placeholder="Rate (₹)">
-                            </div>
-                            <div class="col-1">
-                                <button class="btn btn-sm btn-success" onclick="addItem()">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Items List -->
-                    <div id="itemsContainer" class="mb-3">
-                        <p class="text-muted">No items added yet</p>
-                    </div>
-                    
-                    <!-- Total -->
-                    <div class="total-display mb-3">
-                        Total Amount: ₹<span id="totalAmount">0</span>
-                    </div>
-                    
-                    <!-- Save Button -->
-                    <button class="btn btn-primary w-100 py-2" onclick="saveBill()">
-                        💾 SAVE BILL TO DATABASE
-                    </button>
-                    
-                    <!-- Status Message -->
-                    <div id="statusMessage" class="mt-2 text-center"></div>
                 </div>
             </div>
-            
-            <!-- Right Column - Saved Bills -->
-            <div class="col-md-6">
-                <div class="card-custom">
-                    <h3 class="mb-4">📋 Saved Bills</h3>
-                    
-                    <!-- Bills Counter -->
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Total Bills: <strong id="billCount">0</strong></span>
-                        <button class="btn btn-sm btn-outline-danger" onclick="clearAllBills()">
-                            Clear All
-                        </button>
-                    </div>
-                    
-                    <!-- Bills List -->
-                    <div id="billsList" style="max-height: 500px; overflow-y: auto;">
-                        <p class="text-muted">No bills saved yet</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Everything You Need</h2>
+                <p class="lead text-muted">All-in-one solution for your business</p>
+            </div>
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4>Smart Billing</h4>
+                        <p>Create professional invoices with GST calculation. Print or send via WhatsApp.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> GST Invoices</li>
+                            <li><i class="fas fa-check text-success"></i> WhatsApp Sharing</li>
+                            <li><i class="fas fa-check text-success"></i> Print Support</li>
+                        </ul>
                     </div>
                 </div>
-                
-                <!-- Stats Card -->
-                <div class="card-custom">
-                    <h5>📊 Today's Statistics</h5>
-                    <div class="row text-center">
-                        <div class="col-4">
-                            <div class="p-2">
-                                <h2 id="todayBills">0</h2>
-                                <small>Today's Bills</small>
-                            </div>
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-boxes"></i>
                         </div>
-                        <div class="col-4">
-                            <div class="p-2">
-                                <h2 id="todaySales">₹0</h2>
-                                <small>Today's Sales</small>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="p-2">
-                                <h2 id="totalSales">₹0</h2>
-                                <small>Total Sales</small>
-                            </div>
-                        </div>
+                        <h4>Inventory Management</h4>
+                        <p>Track stock levels, get low stock alerts, and manage suppliers.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Stock Tracking</li>
+                            <li><i class="fas fa-check text-success"></i> Low Stock Alerts</li>
+                            <li><i class="fas fa-check text-success"></i> Barcode Support</li>
+                        </ul>
                     </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <h4>Credit Management</h4>
+                        <p>Track customer credit, send payment reminders, and manage collections.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Credit Tracking</li>
+                            <li><i class="fas fa-check text-success"></i> SMS Reminders</li>
+                            <li><i class="fas fa-check text-success"></i> Settlement History</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Business Reports</h4>
+                        <p>Get detailed insights into sales, profits, and business performance.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Profit & Loss</li>
+                            <li><i class="fas fa-check text-success"></i> Sales Reports</li>
+                            <li><i class="fas fa-check text-success"></i> Customer Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 5 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile App</h4>
+                        <p>Access your business data anywhere, anytime from your mobile phone.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> iOS & Android</li>
+                            <li><i class="fas fa-check text-success"></i> Offline Mode</li>
+                            <li><i class="fas fa-check text-success"></i> Push Notifications</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 6 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>GST & Tax Compliance</h4>
+                        <p>Automated GST calculation and tax filing assistance.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> GST Reports</li>
+                            <li><i class="fas fa-check text-success"></i> Tax Filing</li>
+                            <li><i class="fas fa-check text-success"></i> Audit Trail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-card">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Welcome Back</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Email or Phone Number</label>
+                            <input type="text" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-gradient w-100 mb-3">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <div class="text-center">
+                            <a href="#" class="text-decoration-none">Forgot password?</a>
+                            <p class="mt-2">Don't have an account? <a href="#" onclick="showSignup()" class="text-primary">Sign up</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        // ====================
-        // GLOBAL VARIABLES
-        // ====================
-        let currentItems = [];  // Items in current bill
-        let allBills = [];      // All saved bills
-        
-        // ====================
-        // PAGE LOAD
-        // ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Page loaded, loading saved bills...");
-            loadSavedBills();
-            updateStats();
-        });
-        
-        // ====================
-        // 1. ADD ITEM FUNCTION
-        // ====================
-        function addItem() {
-            const name = document.getElementById('itemName').value.trim();
-            const qty = parseInt(document.getElementById('itemQty').value);
-            const rate = parseFloat(document.getElementById('itemRate').value);
-            
-            // Validation
-            if (!name) {
-                showMessage("Please enter item name", "danger");
-                return;
-            }
-            if (isNaN(qty) || qty <= 0) {
-                showMessage("Please enter valid quantity", "danger");
-                return;
-            }
-            if (isNaN(rate) || rate <= 0) {
-                showMessage("Please enter valid rate", "danger");
-                return;
-            }
-            
-            // Create item object
-            const item = {
-                id: Date.now() + Math.random(),
-                name: name,
-                quantity: qty,
-                rate: rate,
-                total: qty * rate
-            };
-            
-            // Add to current items
-            currentItems.push(item);
-            
-            // Update display
-            updateItemsDisplay();
-            updateTotal();
-            
-            // Clear input fields
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemQty').value = '1';
-            document.getElementById('itemRate').value = '';
-            
-            // Focus back to item name
-            document.getElementById('itemName').focus();
-            
-            showMessage(`"${name}" added successfully`, "success");
-        }
-        
-        // ====================
-        // 2. UPDATE ITEMS DISPLAY
-        // ====================
-        function updateItemsDisplay() {
-            const container = document.getElementById('itemsContainer');
-            
-            if (currentItems.length === 0) {
-                container.innerHTML = '<p class="text-muted">No items added yet</p>';
-                return;
-            }
-            
-            let html = '<div class="list-group">';
-            currentItems.forEach((item, index) => {
-                html += `
-                <div class="list-group-item bill-item">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>${item.name}</strong>
-                            <br>
-                            <small>${item.quantity} × ₹${item.rate} = ₹${item.total}</small>
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-card">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Create Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signupForm" onsubmit="handleSignup(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Shop/Business Name</label>
+                            <input type="text" class="form-control" id="shopName" required>
                         </div>
-                        <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">
-                            ✕
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Business Type</label>
+                            <select class="form-select" id="businessType">
+                                <option value="kirana">Kirana Store</option>
+                                <option value="medical">Medical Store</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="retail">Retail Shop</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label">I agree to terms & conditions</label>
+                        </div>
+                        <button type="submit" class="btn btn-gradient w-100 mb-3">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                        <div class="text-center">
+                            <p>Already have an account? <a href="#" onclick="showLogin()" class="text-primary">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Simple, Transparent Pricing</h2>
+                <p class="lead text-muted">Free forever for small businesses</p>
+            </div>
+            <div class="row justify-content-center">
+                <!-- Free Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card">
+                        <h4 class="fw-bold">Free</h4>
+                        <div class="price mt-4">₹0<small>/month</small></div>
+                        <p class="text-muted">Perfect for small shops</p>
+                        <ul class="list-unstyled mt-4">
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> 100 bills/month</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Basic Inventory</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> 10 Customers</li>
+                            <li class="mb-2"><i class="fas fa-times text-muted"></i> GST Reports</li>
+                            <li class="mb-2"><i class="fas fa-times text-muted"></i> WhatsApp Integration</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100 mt-3" onclick="showSignup()">
+                            Get Started Free
                         </button>
                     </div>
-                </div>`;
-            });
-            html += '</div>';
-            
-            container.innerHTML = html;
-        }
-        
-        // ====================
-        // 3. REMOVE ITEM
-        // ====================
-        function removeItem(index) {
-            if (confirm("Remove this item?")) {
-                currentItems.splice(index, 1);
-                updateItemsDisplay();
-                updateTotal();
-                showMessage("Item removed", "warning");
-            }
-        }
-        
-        // ====================
-        // 4. UPDATE TOTAL
-        // ====================
-        function updateTotal() {
-            const total = currentItems.reduce((sum, item) => sum + item.total, 0);
-            document.getElementById('totalAmount').textContent = total.toFixed(2);
-        }
-        
-        // ====================
-        // 5. SAVE BILL (MAIN FUNCTION)
-        // ====================
-        function saveBill() {
-            // Get customer name
-            const customerName = document.getElementById('customerName').value.trim();
-            
-            // Validation
-            if (!customerName) {
-                showMessage("Please enter customer name", "danger");
-                document.getElementById('customerName').focus();
-                return;
-            }
-            
-            if (currentItems.length === 0) {
-                showMessage("Please add at least one item", "danger");
-                return;
-            }
-            
-            // Create bill object
-            const bill = {
-                id: 'BILL-' + Date.now(),
-                customerName: customerName,
-                items: [...currentItems], // Copy items
-                totalAmount: currentItems.reduce((sum, item) => sum + item.total, 0),
-                date: new Date().toLocaleString(),
-                timestamp: Date.now()
-            };
-            
-            // Add to bills array
-            allBills.push(bill);
-            
-            // Save to localStorage
-            saveToLocalStorage();
-            
-            // Update display
-            updateBillsDisplay();
-            updateStats();
-            
-            // Reset form
-            resetForm();
-            
-            // Show success message
-            showMessage(`Bill saved successfully! Total: ₹${bill.totalAmount.toFixed(2)}`, "success");
-            
-            // Play success sound (optional)
-            playSuccessSound();
-        }
-        
-        // ====================
-        // 6. SAVE TO LOCALSTORAGE
-        // ====================
-        function saveToLocalStorage() {
-            try {
-                localStorage.setItem('businessBills', JSON.stringify(allBills));
-                console.log("Bills saved to localStorage. Total:", allBills.length);
-                return true;
-            } catch (error) {
-                console.error("Error saving to localStorage:", error);
-                showMessage("Error saving bill. Local storage might be full.", "danger");
-                return false;
-            }
-        }
-        
-        // ====================
-        // 7. LOAD SAVED BILLS
-        // ====================
-        function loadSavedBills() {
-            try {
-                const saved = localStorage.getItem('businessBills');
-                if (saved) {
-                    allBills = JSON.parse(saved);
-                    console.log("Loaded bills from localStorage:", allBills.length);
-                    updateBillsDisplay();
-                } else {
-                    console.log("No saved bills found");
-                    allBills = [];
-                }
-            } catch (error) {
-                console.error("Error loading bills:", error);
-                allBills = [];
-            }
-        }
-        
-        // ====================
-        // 8. UPDATE BILLS DISPLAY
-        // ====================
-        function updateBillsDisplay() {
-            const container = document.getElementById('billsList');
-            const countElement = document.getElementById('billCount');
-            
-            countElement.textContent = allBills.length;
-            
-            if (allBills.length === 0) {
-                container.innerHTML = '<p class="text-muted">No bills saved yet</p>';
-                return;
-            }
-            
-            // Sort by date (newest first)
-            const sortedBills = [...allBills].sort((a, b) => b.timestamp - a.timestamp);
-            
-            let html = '<div class="list-group">';
-            sortedBills.forEach((bill, index) => {
-                html += `
-                <div class="list-group-item mb-2">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <strong>${bill.customerName}</strong>
-                            <br>
-                            <small class="text-muted">${bill.date}</small>
+                </div>
+                <!-- Popular Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card popular">
+                        <span class="popular-badge">MOST POPULAR</span>
+                        <h4 class="fw-bold">Pro</h4>
+                        <div class="price mt-4">₹299<small>/month</small></div>
+                        <p class="text-muted">Growing businesses</p>
+                        <ul class="list-unstyled mt-4">
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited bills</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced Inventory</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited Customers</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> GST Reports</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp Integration</li>
+                        </ul>
+                        <button class="btn btn-gradient w-100 mt-3" onclick="showSignup()">
+                            Start 14-Day Trial
+                        </button>
+                    </div>
+                </div>
+                <!-- Business Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="pricing-card">
+                        <h4 class="fw-bold">Business</h4>
+                        <div class="price mt-4">₹799<small>/month</small></div>
+                        <p class="text-muted">Multi-store businesses</p>
+                        <ul class="list-unstyled mt-4">
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Everything in Pro</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Multi-store Support</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Staff Accounts (5)</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> API Access</li>
+                            <li class="mb-2"><i class="fas fa-check text-success"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100 mt-3" onclick="showSignup()">
+                            Contact Sales
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Trusted by 5000+ Businesses</h2>
+                <p class="lead text-muted">See what our users say</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="avatar me-3">R</div>
+                            <div>
+                                <h5 class="mb-0">Rajesh Kumar</h5>
+                                <small class="text-muted">Kirana Store, Delhi</small>
+                            </div>
                         </div>
-                        <div class="text-end">
-                            <h5>₹${bill.totalAmount.toFixed(2)}</h5>
-                            <small>${bill.items.length} items</small>
+                        <p>"This app saved me 2 hours daily. Now I can track everything from my phone. Credit tracking feature is amazing!"</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-outline-info mt-2" onclick="viewBillDetails(${index})">
-                        View Details
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger mt-2" onclick="deleteBill(${index})">
-                        Delete
-                    </button>
-                </div>`;
-            });
-            html += '</div>';
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="avatar me-3">P</div>
+                            <div>
+                                <h5 class="mb-0">Priya Sharma</h5>
+                                <small class="text-muted">Medical Store, Mumbai</small>
+                            </div>
+                        </div>
+                        <p>"Expiry tracking feature saved me from huge losses. GST reports are accurate and save tax filing time."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="avatar me-3">A</div>
+                            <div>
+                                <h5 class="mb-0">Amit Patel</h5>
+                                <small class="text-muted">Electronics Shop, Bangalore</small>
+                            </div>
+                        </div>
+                        <p>"From notebook to digital in 1 day! My sales increased by 15% because I can now track what sells best."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(90deg, var(--primary), var(--secondary));">
+        <div class="container">
+            <div class="row justify-content-center text-center text-white">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
+                    <p class="lead mb-4">Join 5000+ businesses already using BusinessOS. Start your free trial today.</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button class="btn btn-light btn-lg px-5" onclick="showSignup()">
+                            <i class="fas fa-play"></i> Start Free Trial
+                        </button>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-comment"></i> Talk to Sales
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="mb-4">
+                        <i class="fas fa-store"></i> BusinessOS
+                    </h4>
+                    <p>Simple, powerful business management software for Indian businesses. Free forever for small shops.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Product</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-light text-decoration-none">Features</a></li>
+                        <li><a href="#pricing" class="text-light text-decoration-none">Pricing</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">API</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Blog</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@businessos.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Mumbai, India</li>
+                    </ul>
+                    <div class="mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2024 BusinessOS. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#" class="text-light text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-light text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show Login Modal
+        function showLogin() {
+            var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+        
+        // Show Signup Modal
+        function showSignup() {
+            var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+            signupModal.show();
+        }
+        
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
             
-            container.innerHTML = html;
-        }
-        
-        // ====================
-        // 9. VIEW BILL DETAILS
-        // ====================
-        function viewBillDetails(index) {
-            const bill = allBills[index];
-            let itemsList = '';
-            bill.items.forEach(item => {
-                itemsList += `${item.quantity} × ${item.name} @ ₹${item.rate} = ₹${item.total}\n`;
-            });
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            alert(`BILL DETAILS
-Customer: ${bill.customerName}
-Date: ${bill.date}
-Total: ₹${bill.totalAmount.toFixed(2)}
-Items:
-${itemsList}`);
-        }
-        
-        // ====================
-        // 10. DELETE BILL
-        // ====================
-        function deleteBill(index) {
-            if (confirm("Are you sure you want to delete this bill?")) {
-                allBills.splice(index, 1);
-                saveToLocalStorage();
-                updateBillsDisplay();
-                updateStats();
-                showMessage("Bill deleted", "warning");
-            }
-        }
-        
-        // ====================
-        // 11. CLEAR ALL BILLS
-        // ====================
-        function clearAllBills() {
-            if (allBills.length === 0) {
-                showMessage("No bills to clear", "info");
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill all fields');
                 return;
             }
             
-            if (confirm(`Are you sure you want to delete ALL ${allBills.length} bills? This cannot be undone.`)) {
-                allBills = [];
-                localStorage.removeItem('businessBills');
-                updateBillsDisplay();
-                updateStats();
-                showMessage("All bills cleared", "warning");
-            }
+            // For demo, accept any login
+            // In real app, you would check with server
+            
+            // Store user info in localStorage
+            localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
         }
         
-        // ====================
-        // 12. UPDATE STATISTICS
-        // ====================
-        function updateStats() {
-            const today = new Date().toLocaleDateString();
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
             
-            // Today's bills
-            const todayBills = allBills.filter(bill => 
-                new Date(bill.timestamp).toLocaleDateString() === today
-            );
+            const shopName = document.getElementById('shopName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const businessType = document.getElementById('businessType').value;
+            const password = document.getElementById('signupPassword').value;
             
-            // Today's sales
-            const todaySales = todayBills.reduce((sum, bill) => sum + bill.totalAmount, 0);
-            
-            // Total sales
-            const totalSales = allBills.reduce((sum, bill) => sum + bill.totalAmount, 0);
-            
-            // Update display
-            document.getElementById('todayBills').textContent = todayBills.length;
-            document.getElementById('todaySales').textContent = '₹' + todaySales.toFixed(2);
-            document.getElementById('totalSales').textContent = '₹' + totalSales.toFixed(2);
-        }
-        
-        // ====================
-        // 13. RESET FORM
-        // ====================
-        function resetForm() {
-            document.getElementById('customerName').value = '';
-            currentItems = [];
-            updateItemsDisplay();
-            updateTotal();
-            document.getElementById('customerName').focus();
-        }
-        
-        // ====================
-        // 14. SHOW MESSAGE
-        // ====================
-        function showMessage(text, type) {
-            const messageDiv = document.getElementById('statusMessage');
-            messageDiv.innerHTML = `
-                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                    ${text}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>`;
-            
-            // Auto remove after 3 seconds
-            setTimeout(() => {
-                if (messageDiv.firstChild) {
-                    messageDiv.removeChild(messageDiv.firstChild);
-                }
-            }, 3000);
-        }
-        
-        // ====================
-        // 15. PLAY SUCCESS SOUND (Optional)
-        // ====================
-        function playSuccessSound() {
-            // Simple beep sound
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = 800;
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.5);
-            } catch (e) {
-                // Sound not supported, continue silently
-            }
-        }
-        
-        // ====================
-        // 16. KEYBOARD SHORTCUTS
-        // ====================
-        document.addEventListener('keydown', function(event) {
-            // Ctrl + Enter to save bill
-            if (event.ctrlKey && event.key === 'Enter') {
-                event.preventDefault();
-                saveBill();
-            }
-            
-            // Enter in item name field to add item
-            if (event.target.id === 'itemName' && event.key === 'Enter') {
-                event.preventDefault();
-                addItem();
-            }
-            
-            // Enter in rate field to add item
-            if (event.target.id === 'itemRate' && event.key === 'Enter') {
-                event.preventDefault();
-                addItem();
-            }
-        });
-        
-        // ====================
-        // 17. EXPORT BILLS (Bonus Feature)
-        // ====================
-        function exportBills() {
-            if (allBills.length === 0) {
-                showMessage("No bills to export", "info");
+            // Simple validation
+            if (!shopName || !email || !phone || !password) {
+                alert('Please fill all required fields');
                 return;
             }
             
-            const dataStr = JSON.stringify(allBills, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportFileDefaultName = `business-bills-${new Date().toISOString().split('T')[0]}.json`;
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
-            
-            showMessage("Bills exported successfully", "success");
-        }
-        
-        // ====================
-        // 18. IMPORT BILLS (Bonus Feature)
-        // ====================
-        function importBills() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            
-            input.onchange = function(event) {
-                const file = event.target.files[0];
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    try {
-                        const importedBills = JSON.parse(e.target.result);
-                        if (Array.isArray(importedBills)) {
-                            allBills = importedBills;
-                            saveToLocalStorage();
-                            updateBillsDisplay();
-                            updateStats();
-                            showMessage(`Successfully imported ${importedBills.length} bills`, "success");
-                        } else {
-                            showMessage("Invalid file format", "danger");
-                        }
-                    } catch (error) {
-                        showMessage("Error reading file: " + error.message, "danger");
-                    }
-                };
-                
-                reader.readAsText(file);
+            // Store user data
+            const userData = {
+                shopName: shopName,
+                email: email,
+                phone: phone,
+                businessType: businessType,
+                createdAt: new Date().toISOString()
             };
             
-            input.click();
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('userLoggedIn', 'true');
+            
+            // Show success message
+            alert('Account created successfully! Redirecting to dashboard...');
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
         }
         
-        // ====================
-        // INITIALIZE ON LOAD
-        // ====================
-        console.log("Business App initialized successfully!");
-        console.log("Available functions:");
-        console.log("- addItem(): Add item to current bill");
-        console.log("- saveBill(): Save current bill");
-        console.log("- clearAllBills(): Delete all bills");
-        console.log("- exportBills(): Download bills as JSON");
-        console.log("- importBills(): Import bills from JSON file");
+        // Check if user is already logged in
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (isLoggedIn === 'true') {
+                // User is logged in, show dashboard link in nav
+                const nav = document.querySelector('.navbar-nav');
+                const dashboardItem = document.createElement('li');
+                dashboardItem.className = 'nav-item';
+                dashboardItem.innerHTML = `
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                `;
+                nav.appendChild(dashboardItem);
+            }
+        };
         
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
