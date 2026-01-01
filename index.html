@@ -3,125 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusinessOS - Free Business Management</title>
+    <title>BusinessOS - Free Business Management Software</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
             --secondary: #3a0ca3;
             --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f72585;
             --light: #f8f9fa;
             --dark: #212529;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             color: var(--dark);
         }
         
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s;
         }
         
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            color: var(--dark) !important;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: var(--gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        /* Feature Cards */
         .feature-card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
             height: 100%;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
         
         .feature-icon {
-            font-size: 50px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .login-card {
-            background: white;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            padding: 40px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .btn-gradient {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .nav-brand {
-            font-size: 24px;
-            font-weight: bold;
-            color: white !important;
-        }
-        
-        .nav-brand i {
-            color: var(--success);
-        }
-        
-        .testimonial-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 25px;
+            font-size: 32px;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
         }
         
+        /* Pricing Cards */
         .pricing-card {
             background: white;
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
+            position: relative;
+            border: 2px solid transparent;
         }
         
         .pricing-card:hover {
             transform: translateY(-10px);
+            border-color: var(--primary);
         }
         
         .pricing-card.popular {
-            border: 3px solid var(--primary);
-            position: relative;
+            border-color: var(--primary);
+            background: linear-gradient(white, white), var(--gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
         }
         
         .popular-badge {
@@ -129,17 +168,20 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
-            padding: 5px 20px;
-            border-radius: 20px;
+            padding: 8px 25px;
+            border-radius: 50px;
             font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
         
         .price {
             font-size: 48px;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--primary);
+            margin: 20px 0;
         }
         
         .price small {
@@ -147,21 +189,103 @@
             color: #666;
         }
         
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            border-bottom: none;
+            padding: 30px 30px 10px;
+        }
+        
+        .modal-body {
+            padding: 10px 30px 30px;
+        }
+        
+        /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 50px 0 20px;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
         }
         
         .social-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin: 0 5px;
+            margin-right: 10px;
             transition: all 0.3s;
         }
         
@@ -169,13 +293,32 @@
             background: var(--primary);
             transform: translateY(-3px);
         }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding: 100px 0 60px;
+            }
+            
+            .feature-card, .pricing-card {
+                padding: 30px 20px;
+            }
+            
+            .price {
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand nav-brand" href="#">
+            <a class="navbar-brand" href="#">
                 <i class="fas fa-store"></i> BusinessOS
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -184,7 +327,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+                        <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Features</a>
@@ -195,11 +338,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#testimonials">Testimonials</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
                     <li class="nav-item ms-2">
-                        <button class="btn btn-gradient" onclick="showLogin()">
+                        <button class="btn btn-primary" onclick="showLoginModal()">
                             <i class="fas fa-sign-in-alt"></i> Login
                         </button>
                     </li>
@@ -209,20 +349,26 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h1 class="display-3 fw-bold mb-4">Manage Your Business Like a Pro</h1>
-                    <p class="lead mb-4">Free business management software for shopkeepers, retailers, and small businesses. Everything you need in one place.</p>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <button class="btn btn-gradient btn-lg" onclick="showSignup()">
-                            <i class="fas fa-rocket"></i> Start Free Trial
-                        </button>
-                        <a href="#features" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-play-circle"></i> Watch Demo
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Manage Your Business Like a Pro</h1>
+                        <p>Free business management software for shopkeepers, retailers, and small businesses. Everything you need in one place.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <button class="btn btn-primary btn-lg" onclick="showSignupModal()">
+                                <i class="fas fa-rocket"></i> Start Free Trial
+                            </button>
+                            <a href="#features" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-play-circle"></i> Watch Demo
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="Business Dashboard" class="img-fluid rounded-3 shadow-lg">
                 </div>
             </div>
         </div>
@@ -235,6 +381,7 @@
                 <h2 class="display-5 fw-bold">Everything You Need</h2>
                 <p class="lead text-muted">All-in-one solution for your business</p>
             </div>
+            
             <div class="row g-4">
                 <!-- Feature 1 -->
                 <div class="col-md-4">
@@ -244,13 +391,14 @@
                         </div>
                         <h4>Smart Billing</h4>
                         <p>Create professional invoices with GST calculation. Print or send via WhatsApp.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> GST Invoices</li>
-                            <li><i class="fas fa-check text-success"></i> WhatsApp Sharing</li>
-                            <li><i class="fas fa-check text-success"></i> Print Support</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> GST Invoices</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> WhatsApp Sharing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Print Support</li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Feature 2 -->
                 <div class="col-md-4">
                     <div class="feature-card">
@@ -259,13 +407,14 @@
                         </div>
                         <h4>Inventory Management</h4>
                         <p>Track stock levels, get low stock alerts, and manage suppliers.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> Stock Tracking</li>
-                            <li><i class="fas fa-check text-success"></i> Low Stock Alerts</li>
-                            <li><i class="fas fa-check text-success"></i> Barcode Support</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Stock Tracking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Low Stock Alerts</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Barcode Support</li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Feature 3 -->
                 <div class="col-md-4">
                     <div class="feature-card">
@@ -274,13 +423,14 @@
                         </div>
                         <h4>Credit Management</h4>
                         <p>Track customer credit, send payment reminders, and manage collections.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> Credit Tracking</li>
-                            <li><i class="fas fa-check text-success"></i> SMS Reminders</li>
-                            <li><i class="fas fa-check text-success"></i> Settlement History</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Credit Tracking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> SMS Reminders</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Settlement History</li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Feature 4 -->
                 <div class="col-md-4">
                     <div class="feature-card">
@@ -289,13 +439,14 @@
                         </div>
                         <h4>Business Reports</h4>
                         <p>Get detailed insights into sales, profits, and business performance.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> Profit & Loss</li>
-                            <li><i class="fas fa-check text-success"></i> Sales Reports</li>
-                            <li><i class="fas fa-check text-success"></i> Customer Analytics</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Profit & Loss</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Sales Reports</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Customer Analytics</li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Feature 5 -->
                 <div class="col-md-4">
                     <div class="feature-card">
@@ -304,13 +455,14 @@
                         </div>
                         <h4>Mobile App</h4>
                         <p>Access your business data anywhere, anytime from your mobile phone.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> iOS & Android</li>
-                            <li><i class="fas fa-check text-success"></i> Offline Mode</li>
-                            <li><i class="fas fa-check text-success"></i> Push Notifications</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> iOS & Android</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Offline Mode</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Push Notifications</li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Feature 6 -->
                 <div class="col-md-4">
                     <div class="feature-card">
@@ -319,10 +471,10 @@
                         </div>
                         <h4>GST & Tax Compliance</h4>
                         <p>Automated GST calculation and tax filing assistance.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success"></i> GST Reports</li>
-                            <li><i class="fas fa-check text-success"></i> Tax Filing</li>
-                            <li><i class="fas fa-check text-success"></i> Audit Trail</li>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> GST Reports</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Tax Filing</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Audit Trail</li>
                         </ul>
                     </div>
                 </div>
@@ -333,8 +485,8 @@
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content login-card">
-                <div class="modal-header border-0">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title">Welcome Back</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -342,22 +494,22 @@
                     <form id="loginForm" onsubmit="handleLogin(event)">
                         <div class="mb-3">
                             <label class="form-label">Email or Phone Number</label>
-                            <input type="text" class="form-control" id="loginEmail" required>
+                            <input type="text" class="form-control" id="loginEmail" placeholder="Enter email or phone" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" required>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="rememberMe">
                             <label class="form-check-label">Remember me</label>
                         </div>
-                        <button type="submit" class="btn btn-gradient w-100 mb-3">
+                        <button type="submit" class="btn btn-primary w-100 py-2">
                             <i class="fas fa-sign-in-alt"></i> Login
                         </button>
-                        <div class="text-center">
+                        <div class="text-center mt-3">
                             <a href="#" class="text-decoration-none">Forgot password?</a>
-                            <p class="mt-2">Don't have an account? <a href="#" onclick="showSignup()" class="text-primary">Sign up</a></p>
+                            <p class="mt-2">Don't have an account? <a href="#" onclick="showSignupModal()" class="text-primary fw-bold">Sign up</a></p>
                         </div>
                     </form>
                 </div>
@@ -368,24 +520,24 @@
     <!-- Signup Modal -->
     <div class="modal fade" id="signupModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content login-card">
-                <div class="modal-header border-0">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title">Create Account</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="signupForm" onsubmit="handleSignup(event)">
                         <div class="mb-3">
-                            <label class="form-label">Shop/Business Name</label>
-                            <input type="text" class="form-control" id="shopName" required>
+                            <label class="form-label">Shop/Business Name *</label>
+                            <input type="text" class="form-control" id="shopName" placeholder="Enter shop name" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="signupEmail" required>
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Enter email" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phoneNumber" required>
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter phone number" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Business Type</label>
@@ -398,18 +550,18 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signupPassword" required>
+                            <label class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Create password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="terms" required>
                             <label class="form-check-label">I agree to terms & conditions</label>
                         </div>
-                        <button type="submit" class="btn btn-gradient w-100 mb-3">
+                        <button type="submit" class="btn btn-primary w-100 py-2">
                             <i class="fas fa-user-plus"></i> Create Account
                         </button>
-                        <div class="text-center">
-                            <p>Already have an account? <a href="#" onclick="showLogin()" class="text-primary">Login</a></p>
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a href="#" onclick="showLoginModal()" class="text-primary fw-bold">Login</a></p>
                         </div>
                     </form>
                 </div>
@@ -424,58 +576,67 @@
                 <h2 class="display-5 fw-bold">Simple, Transparent Pricing</h2>
                 <p class="lead text-muted">Free forever for small businesses</p>
             </div>
+            
             <div class="row justify-content-center">
                 <!-- Free Plan -->
-                <div class="col-md-4 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="pricing-card">
                         <h4 class="fw-bold">Free</h4>
-                        <div class="price mt-4">₹0<small>/month</small></div>
-                        <p class="text-muted">Perfect for small shops</p>
-                        <ul class="list-unstyled mt-4">
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> 100 bills/month</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Basic Inventory</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> 10 Customers</li>
-                            <li class="mb-2"><i class="fas fa-times text-muted"></i> GST Reports</li>
-                            <li class="mb-2"><i class="fas fa-times text-muted"></i> WhatsApp Integration</li>
+                        <div class="price">₹0<small>/month</small></div>
+                        <p class="text-muted mb-4">Perfect for small shops</p>
+                        
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 100 bills/month</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Basic Inventory</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 10 Customers</li>
+                            <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> GST Reports</li>
+                            <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> WhatsApp Integration</li>
                         </ul>
-                        <button class="btn btn-outline-primary w-100 mt-3" onclick="showSignup()">
+                        
+                        <button class="btn btn-outline-primary w-100" onclick="showSignupModal()">
                             Get Started Free
                         </button>
                     </div>
                 </div>
-                <!-- Popular Plan -->
-                <div class="col-md-4 mb-4">
+                
+                <!-- Pro Plan -->
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="pricing-card popular">
                         <span class="popular-badge">MOST POPULAR</span>
                         <h4 class="fw-bold">Pro</h4>
-                        <div class="price mt-4">₹299<small>/month</small></div>
-                        <p class="text-muted">Growing businesses</p>
-                        <ul class="list-unstyled mt-4">
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited bills</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Advanced Inventory</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Unlimited Customers</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> GST Reports</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> WhatsApp Integration</li>
+                        <div class="price">₹299<small>/month</small></div>
+                        <p class="text-muted mb-4">Growing businesses</p>
+                        
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited bills</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Advanced Inventory</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Customers</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> GST Reports</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> WhatsApp Integration</li>
                         </ul>
-                        <button class="btn btn-gradient w-100 mt-3" onclick="showSignup()">
+                        
+                        <button class="btn btn-primary w-100" onclick="showSignupModal()">
                             Start 14-Day Trial
                         </button>
                     </div>
                 </div>
+                
                 <!-- Business Plan -->
-                <div class="col-md-4 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="pricing-card">
                         <h4 class="fw-bold">Business</h4>
-                        <div class="price mt-4">₹799<small>/month</small></div>
-                        <p class="text-muted">Multi-store businesses</p>
-                        <ul class="list-unstyled mt-4">
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Everything in Pro</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Multi-store Support</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Staff Accounts (5)</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> API Access</li>
-                            <li class="mb-2"><i class="fas fa-check text-success"></i> Priority Support</li>
+                        <div class="price">₹799<small>/month</small></div>
+                        <p class="text-muted mb-4">Multi-store businesses</p>
+                        
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Everything in Pro</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Multi-store Support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Staff Accounts (5)</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> API Access</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Priority Support</li>
                         </ul>
-                        <button class="btn btn-outline-primary w-100 mt-3" onclick="showSignup()">
+                        
+                        <button class="btn btn-outline-primary w-100" onclick="showSignupModal()">
                             Contact Sales
                         </button>
                     </div>
@@ -491,17 +652,18 @@
                 <h2 class="display-5 fw-bold">Trusted by 5000+ Businesses</h2>
                 <p class="lead text-muted">See what our users say</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-4">
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
                     <div class="testimonial-card">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="avatar me-3">R</div>
+                            <div class="avatar">R</div>
                             <div>
                                 <h5 class="mb-0">Rajesh Kumar</h5>
                                 <small class="text-muted">Kirana Store, Delhi</small>
                             </div>
                         </div>
-                        <p>"This app saved me 2 hours daily. Now I can track everything from my phone. Credit tracking feature is amazing!"</p>
+                        <p class="mb-3">"This app saved me 2 hours daily. Now I can track everything from my phone. Credit tracking feature is amazing!"</p>
                         <div class="text-warning">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -511,16 +673,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                
+                <div class="col-md-4 mb-4">
                     <div class="testimonial-card">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="avatar me-3">P</div>
+                            <div class="avatar">P</div>
                             <div>
                                 <h5 class="mb-0">Priya Sharma</h5>
                                 <small class="text-muted">Medical Store, Mumbai</small>
                             </div>
                         </div>
-                        <p>"Expiry tracking feature saved me from huge losses. GST reports are accurate and save tax filing time."</p>
+                        <p class="mb-3">"Expiry tracking feature saved me from huge losses. GST reports are accurate and save tax filing time."</p>
                         <div class="text-warning">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -530,16 +693,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                
+                <div class="col-md-4 mb-4">
                     <div class="testimonial-card">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="avatar me-3">A</div>
+                            <div class="avatar">A</div>
                             <div>
                                 <h5 class="mb-0">Amit Patel</h5>
                                 <small class="text-muted">Electronics Shop, Bangalore</small>
                             </div>
                         </div>
-                        <p>"From notebook to digital in 1 day! My sales increased by 15% because I can now track what sells best."</p>
+                        <p class="mb-3">"From notebook to digital in 1 day! My sales increased by 15% because I can now track what sells best."</p>
                         <div class="text-warning">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -554,14 +718,14 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-5" style="background: linear-gradient(90deg, var(--primary), var(--secondary));">
+    <section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
         <div class="container">
             <div class="row justify-content-center text-center text-white">
                 <div class="col-lg-8">
                     <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
                     <p class="lead mb-4">Join 5000+ businesses already using BusinessOS. Start your free trial today.</p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <button class="btn btn-light btn-lg px-5" onclick="showSignup()">
+                        <button class="btn btn-light btn-lg px-5" onclick="showSignupModal()">
                             <i class="fas fa-play"></i> Start Free Trial
                         </button>
                         <a href="#contact" class="btn btn-outline-light btn-lg">
@@ -581,8 +745,8 @@
                     <h4 class="mb-4">
                         <i class="fas fa-store"></i> BusinessOS
                     </h4>
-                    <p>Simple, powerful business management software for Indian businesses. Free forever for small shops.</p>
-                    <div class="mt-3">
+                    <p class="text-light">Simple, powerful business management software for Indian businesses. Free forever for small shops.</p>
+                    <div class="mt-4">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -590,27 +754,30 @@
                         <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h5>Product</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#features" class="text-light text-decoration-none">Features</a></li>
-                        <li><a href="#pricing" class="text-light text-decoration-none">Pricing</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">API</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Mobile Apps</a></li>
-                    </ul>
+                    <h5 class="mb-3">Product</h5>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#">API</a>
+                        <a href="#">Mobile Apps</a>
+                    </div>
                 </div>
+                
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h5>Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">About</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Careers</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Blog</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Press</a></li>
-                    </ul>
+                    <h5 class="mb-3">Company</h5>
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Press</a>
+                    </div>
                 </div>
+                
                 <div class="col-lg-4 mb-4">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled">
+                    <h5 class="mb-3">Contact</h5>
+                    <ul class="list-unstyled text-light">
                         <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@businessos.com</li>
                         <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 98765 43210</li>
                         <li><i class="fas fa-map-marker-alt me-2"></i> Mumbai, India</li>
@@ -623,12 +790,14 @@
                     </div>
                 </div>
             </div>
-            <hr class="bg-light">
+            
+            <hr class="bg-light my-4">
+            
             <div class="row">
                 <div class="col-md-6">
-                    <p class="mb-0">© 2024 BusinessOS. All rights reserved.</p>
+                    <p class="mb-0 text-light">© 2024 BusinessOS. All rights reserved.</p>
                 </div>
-                <div class="col-md-6 text-end">
+                <div class="col-md-6 text-md-end">
                     <a href="#" class="text-light text-decoration-none me-3">Privacy Policy</a>
                     <a href="#" class="text-light text-decoration-none">Terms of Service</a>
                 </div>
@@ -636,18 +805,19 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         // Show Login Modal
-        function showLogin() {
-            var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        function showLoginModal() {
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
             loginModal.show();
         }
         
         // Show Signup Modal
-        function showSignup() {
-            var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        function showSignupModal() {
+            const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
             signupModal.show();
         }
         
@@ -655,21 +825,36 @@
         function handleLogin(event) {
             event.preventDefault();
             
-            const email = document.getElementById('loginEmail').value;
+            const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
             
-            // Simple validation
             if (!email || !password) {
                 alert('Please fill all fields');
                 return;
             }
             
-            // For demo, accept any login
-            // In real app, you would check with server
+            // Simple validation - In real app, check with server
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
             
-            // Store user info in localStorage
+            // Store login info
             localStorage.setItem('userLoggedIn', 'true');
             localStorage.setItem('userEmail', email);
+            localStorage.setItem('lastLogin', new Date().toISOString());
+            
+            // Check if user exists, if not create demo data
+            if (!localStorage.getItem('userData')) {
+                const userData = {
+                    shopName: 'Demo Shop',
+                    email: email,
+                    phone: '9876543210',
+                    businessType: 'kirana',
+                    createdAt: new Date().toISOString()
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+            }
             
             // Redirect to dashboard
             window.location.href = 'dashboard.html';
@@ -679,42 +864,97 @@
         function handleSignup(event) {
             event.preventDefault();
             
-            const shopName = document.getElementById('shopName').value;
-            const email = document.getElementById('signupEmail').value;
-            const phone = document.getElementById('phoneNumber').value;
+            const shopName = document.getElementById('shopName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
             const businessType = document.getElementById('businessType').value;
             const password = document.getElementById('signupPassword').value;
             
-            // Simple validation
+            // Validation
             if (!shopName || !email || !phone || !password) {
                 alert('Please fill all required fields');
                 return;
             }
             
-            // Store user data
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
+            
+            if (!document.getElementById('terms').checked) {
+                alert('Please accept terms and conditions');
+                return;
+            }
+            
+            // Create user data
             const userData = {
                 shopName: shopName,
                 email: email,
                 phone: phone,
                 businessType: businessType,
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                plan: 'free'
             };
             
+            // Store data
             localStorage.setItem('userData', JSON.stringify(userData));
             localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
             
-            // Show success message
-            alert('Account created successfully! Redirecting to dashboard...');
+            // Create empty data structures
+            localStorage.setItem('businessBills', JSON.stringify([]));
+            localStorage.setItem('inventory', JSON.stringify([]));
+            localStorage.setItem('customers', JSON.stringify([]));
+            
+            alert('Account created successfully! Welcome to BusinessOS!');
             
             // Redirect to dashboard
             window.location.href = 'dashboard.html';
         }
         
-        // Check if user is already logged in
-        window.onload = function() {
+        // Smooth scrolling for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add active class to nav links on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                const scrollPos = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Check if already logged in
             const isLoggedIn = localStorage.getItem('userLoggedIn');
             if (isLoggedIn === 'true') {
-                // User is logged in, show dashboard link in nav
+                // Add dashboard link to nav
                 const nav = document.querySelector('.navbar-nav');
                 const dashboardItem = document.createElement('li');
                 dashboardItem.className = 'nav-item';
@@ -723,25 +963,8 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 `;
-                nav.appendChild(dashboardItem);
+                nav.insertBefore(dashboardItem, nav.lastElementChild);
             }
-        };
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
     </script>
 </body>
